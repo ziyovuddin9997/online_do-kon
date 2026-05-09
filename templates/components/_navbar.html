@@ -1,0 +1,44 @@
+<div class="bg-zinc-900 text-white py-5">
+    <div class="max-w-[1120px] mx-auto flex flex-row items-center justify-between">
+        <div class="text-xl flex flex-row items-center gap-2">
+            <span class="material-icons">shopping_cart</span>
+            Online do'kon
+        </div>
+
+        <div class="flex flex-row">
+            <a class="text-sm rounded px-2 py-1 transition hover:bg-slate-300 hover:text-black {% if request.path == '/categories/' %} bg-slate-300 text-black {% else %} text-slate-300 {% endif %}" href="">Kategoriyalar</a>
+            <a class="text-sm rounded px-2 py-1 transition hover:bg-slate-300 hover:text-black {% if request.path == '/' %} bg-slate-300 text-black {% else %} text-slate-300 {% endif %}" href="{% url 'products' %}">Barcha maxsulotlar</a>
+            <a class="text-sm rounded px-2 py-1 transition hover:bg-slate-300 hover:text-black {% if request.path == '/promotions/' %} bg-slate-300 text-black {% else %} text-slate-300 {% endif %}" href="">Aksiyadagi maxsulotlar</a>
+            {% if request.user.is_authenticated %}
+                <a class="text-sm rounded px-2 py-1 transition hover:bg-slate-300 hover:text-black {% if request.path == '/profile/' %} bg-slate-300 text-black {% else %} text-slate-300 {% endif %}" href="{% url 'profile' %}">Shaxsiy kabinet</a>
+            {% endif %}
+        </div>
+
+
+        {% if request.user.is_authenticated %}
+            <div class="flex flex-row items-center gap-5">
+
+                <a href="{% url 'cart' %}" class="relative">
+                    <span class="material-icons">shopping_cart</span>
+                    {% if request.user.cart_set.count > 0 %}
+                        <span class="h-[8px] w-[8px] rounded-full bg-green-500 absolute -top-1 -right-1"></span>
+                    {% endif %}
+                </a>
+
+                <a href="{% url 'transactions' %}" class="relative">
+                    <span class="material-icons">compare_arrows</span>
+                </a>
+
+                <a href="{% url 'signout' %}" class="flex flex-row items-center gap-2 text-sm rounded px-2 py-1 transition bg-slate-300 text-black hover:bg-slate-400 active:bg-slate-500 active:scale-95">
+                    Chiqish
+                    <span class="material-icons !text-lg">login</span>
+                </a>
+            </div>
+        {% else %}
+            <a href="{% url 'signin' %}" class="flex flex-row items-center gap-2 text-sm rounded px-2 py-1 transition bg-slate-300 text-black hover:bg-slate-400 active:bg-slate-500 active:scale-95">
+                <span class="material-icons !text-lg">login</span>
+                Kirish
+            </a>
+        {% endif %}
+    </div>
+</div>

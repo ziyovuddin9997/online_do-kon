@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold text-center mb-6">
+        Shaxsiy kabinet
+    </h1>
+
+    <div class="max-w-xl mx-auto bg-white shadow-lg rounded-xl p-6">
+        <p class="text-lg mb-4">
+            Ism: <strong>{{ request.user.first_name }}</strong>
+        </p>
+        
+        <p class="text-lg mb-4">
+            Foydalanuvchi: <strong>{{ request.user.phone_number }}</strong>
+        </p>
+
+        <p class="text-gray-600">
+            Akkauntingiz xexe
+        </p>
+    </div>
+</div>
+
+{% endblock %}

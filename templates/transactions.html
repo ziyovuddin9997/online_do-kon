@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="max-w-[1200px] mx-auto px-4 py-10">
+        <h1 class="text-center text-2xl font-semibold text-gray-500 my-5">Tranzaksiyalar</h1>
+
+        {% for transaction in request.user.transaction_set.all %}
+            <div class="w-1/2 mx-auto flex flex-row items-center gap-4 my-2 text-gray-500 rounded-lg py-4 px-8 border border-gray-500">
+                <span>{{ forloop.counter }})</span>
+                <span class="font-semibold ">{{ transaction.product_name }}</span>
+                <span class="text-red-500">- ${{ transaction.amount }}</span>
+                <span class="ms-auto">{{ transaction.created }}</span>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock content %}

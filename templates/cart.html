@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-[1200px] mx-auto px-4 py-10">
+
+    {% if request.user.cart_set.count > 0 %}
+        <h2 class="text-center text-4xl">Savatcha</h2>
+    {% endif %}
+
+    <div class="flex flex-col gap-8 py-2 px-4 rounded-lg mt-10">
+
+        {% for cart_object in cart_objects %}
+            <div class="flex flex-row items-start gap-10">
+                <img src="{{ cart_object.product.image.url }}" class="w-40 h-40 rounded-lg">
+
+                <div class="flex flex-col gap-1 max-w-[200px]">
+                    <h4 class="text-xl text-gray-500">
+                        {{ cart_object.product.name }}
+                    </h4>
+
+                    <p class="text-gray-500 text-justify">
+                        {{ cart_object.product.description|truncatechars:"120" }}
+                    </p>
+                </div>
+
+                <div class="flex flex-col">
+                    <p class="text-gray-500 text-md">
+                        Umumiy narx:
+                    </p>
+
+                    <span class="text-gray-500">
+                        ${{ cart_object.product.price }} x {{ cart_object.count }} = ${{ cart_object.total_price }}
+                    </span>
+                </div>
+
+                <a href="{% url 'delete_cart_prouduct' id=cart_object.id %}">
+                    <span class="material-icons rounded text-red-500 py-1 px-2 border border-red-500 hover:bg-red-500 hover:text-white hover:cursor-pointer transition">
+                        delete
+                    </span>
+                </a>
+            </div>
+
+        {% empty %}
+            <span class="text-gray-500 text-center text-4xl opacity-60">
+                Hali maxsulot tanlamadingiz 🤔
+            </span>
+        {% endfor %}
+
+        {% if request.user.cart_set.count > 0 %}
+            <a href="{% url 'buy' %}"
+               class="flex flex-row items-center gap-1 bg-green-500 text-white font-semibold rounded-lg py-2 px-8 hover:cursor-pointer hover:bg-green-600 active:scale-95 active:bg-green-700 transition max-w-max">
+
+                <span class="material-icons">shopping_cart</span>
+                Sotib olish
+            </a>
+        {% endif %}
+
+    </div>
+
+</div>
+{% endblock content %}

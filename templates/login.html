@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="absolute w-full h-full flex flex-col items-center justify-center">
+        <form method="post" action="" class="shadow shadow-lg border border-gray-500 rounded-xl py-8 px-4 flex flex-col gap-2 w-1/4">
+            {% csrf_token %}
+            <h4 class="font-semibold text-gray-700 mb-4 text-3xl text-center">Tizimga kirish</h4>
+            <input autofocus name="phone_number" required type="text" placeholder="Tel. raqam" class="focus:outline-none border border-gray-500 rounded-lg py-2 px-4 text-gray-500 ring-2 ring-transparent focus:ring-gray-500 transition">
+            <input name="password" required type="password" placeholder="Parol" class="focus:outline-none border border-gray-500 rounded-lg py-2 px-4 text-gray-500 ring-2 ring-transparent focus:ring-gray-500 transition">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <small class="text-red-500 w-full text-center font-semibold">{{ message }}</small>
+                {% endfor %}
+            {% endif %}
+
+            <button type="submit" class="py-2 px-4 font-semibold text-center w-full rounded-lg bg-blue-500 text-white hover:bg-blue-600 focus:bg-blue-700 transition hover:cursor-pointer active:scale-95">Kirish</button>
+
+            <small class="text-gray-500 w-full flex flex-row justify-center items-center gap-1">
+                Akkauntingiz yo'qmi ?
+                <a href="{% url 'signup' %}" class="text-blue-500 hover:text-blue-600 transition font-semibold active:scale-95 underline hover:no-underline">Ro'yxatdan o'ting</a>
+            </small>
+
+        </form>
+    </div>
+{% endblock content %}
